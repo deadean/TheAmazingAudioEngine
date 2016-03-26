@@ -51,6 +51,8 @@ static const int kInputChannelsChangedContext;
     
     self.audioController = audioController;
     
+    
+    
     return self;
 }
 
@@ -110,14 +112,39 @@ static const int kInputChannelsChangedContext;
     _audioController = audioController;
     
     if ( _audioController ) {
+        
+        NSString *stringURL = @"http://dev.vsapi.wavhello.com/Media/Recordings/1005-srjlvOQ9XcolYSQd4VlzAiCYdiv0vM.mp3";
+        NSURL  *url = [NSURL URLWithString:stringURL];
+        NSData *urlData = [NSData dataWithContentsOfURL:url];
+        NSString  *filePath = @"";
+        if ( urlData )
+        {
+            NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString  *documentsDirectory = [paths objectAtIndex:0];
+            
+            filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"test.m4a"];
+            [urlData writeToFile:filePath atomically:YES];
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            
+            if ([fileManager fileExistsAtPath:filePath])
+            {
+                ;
+            }
+        }
+        
         // Create the first loop player
-        self.loop1 = [AEAudioFilePlayer audioFilePlayerWithURL:[[NSBundle mainBundle] URLForResource:@"Southern Rock Drums" withExtension:@"m4a"] error:NULL];
+//        self.loop1 = [AEAudioFilePlayer audioFilePlayerWithURL:[[NSBundle mainBundle] URLForResource:@"Southern Rock Drums" withExtension:@"m4a"] error:NULL];
+        self.loop1 = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL URLWithString:filePath] error:NULL];
+        
         _loop1.volume = 1.0;
         _loop1.channelIsMuted = YES;
         _loop1.loop = YES;
         
         // Create the second loop player
-        self.loop2 = [AEAudioFilePlayer audioFilePlayerWithURL:[[NSBundle mainBundle] URLForResource:@"Southern Rock Organ" withExtension:@"m4a"] error:NULL];
+//        self.loop2 = [AEAudioFilePlayer audioFilePlayerWithURL:[[NSBundle mainBundle] URLForResource:@"Southern Rock Organ" withExtension:@"m4a"] error:NULL];
+        self.loop2 = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL URLWithString:filePath] error:NULL];
+        
         _loop2.volume = 1.0;
         _loop2.channelIsMuted = YES;
         _loop2.loop = YES;
