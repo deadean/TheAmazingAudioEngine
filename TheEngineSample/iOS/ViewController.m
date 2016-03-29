@@ -118,8 +118,8 @@ static const int kInputChannelsChangedContext;
         NSString  *filePath1 = @"";
         NSString  *filePath = @"";
         
-        filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"record.m4a"];
-        filePath1 = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"record1.m4a"];
+        filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"record1.m4a"];
+        filePath1 = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"record2.m4a"];
         
         NSFileManager *fileManager = [NSFileManager defaultManager];
         
@@ -154,7 +154,7 @@ static const int kInputChannelsChangedContext;
         }
         // Create the first loop player
 //        self.loop1 = [AEAudioFilePlayer audioFilePlayerWithURL:[[NSBundle mainBundle] URLForResource:@"Southern Rock Drums" withExtension:@"m4a"] error:NULL];
-        self.loop1 = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL URLWithString:filePath] error:NULL];
+        self.loop1 = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL URLWithString:filePath1] error:NULL];
         
         _loop1.volume = 1.0;
         _loop1.channelIsMuted = YES;
@@ -162,7 +162,7 @@ static const int kInputChannelsChangedContext;
         
         // Create the second loop player
 //        self.loop2 = [AEAudioFilePlayer audioFilePlayerWithURL:[[NSBundle mainBundle] URLForResource:@"Southern Rock Organ" withExtension:@"m4a"] error:NULL];
-        self.loop2 = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL URLWithString:filePath1] error:NULL];
+        self.loop2 = [AEAudioFilePlayer audioFilePlayerWithURL:[NSURL URLWithString:filePath] error:NULL];
         
         _loop2.volume = 1.0;
         _loop2.channelIsMuted = YES;
