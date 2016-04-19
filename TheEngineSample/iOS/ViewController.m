@@ -732,6 +732,7 @@ static const int kInputChannelsChangedContext;
         self.player = nil;
         _playButton.selected = NO;
     } else {
+        
         NSArray *documentsFolders = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *path = [documentsFolders[0] stringByAppendingPathComponent:@"Recording.m4a"];
         
@@ -774,7 +775,10 @@ static inline float translate(float val, float min, float max) {
     
     Float32 inputAvg, inputPeak, outputAvg, outputPeak;
     [_audioController inputAveragePowerLevel:&inputAvg peakHoldLevel:&inputPeak];
+    NSLog(@"input avg : %f, inputPeak : %f", inputAvg, inputPeak);
     [_audioController outputAveragePowerLevel:&outputAvg peakHoldLevel:&outputPeak];
+    NSLog(@"outputAvg : %f, outputPeak : %f", outputAvg, outputPeak);
+
     UIView *headerView = self.tableView.tableHeaderView;
     
     _inputLevelLayer.frame = CGRectMake(headerView.bounds.size.width/2.0 - 5.0 - (translate(inputAvg, -20, 0) * (headerView.bounds.size.width/2.0 - 15.0)),
